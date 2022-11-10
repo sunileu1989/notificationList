@@ -1,0 +1,34 @@
+<mat-accordion (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <ng-template ngFor let-notifications [ngForOf]="notificationData">
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-icon>notifications_active</mat-icon> &nbsp; &nbsp; 
+                     {{notifications.message}}
+                  </mat-panel-title>
+                  
+                </mat-expansion-panel-header>
+                <p style="margin-top: 10px;">{{notifications.description}}</p>
+                
+                <div *ngIf = 'notifications.attachments'>
+                    <div *ngFor="let attachement of notifications.attachments">
+                        <p style="margin-top: 10px;">{{attachement.name}}</p>
+                        <p style="margin-top: 10px;">{{attachement.url}}</p>
+                    </div>
+                    
+                </div>
+                <mat-panel-description>
+                    {{notifications.from?.name}}
+                  </mat-panel-description>
+                <mat-action-row *ngIf = "notifications.actions">
+                        <div *ngFor="let action of notifications.actions">
+                            <div *ngIf = "action.control === 'button'">
+                                <button mat-button color="primary" >{{action.config.label}}</button>
+                            </div>
+                            
+                        </div>
+                </mat-action-row>
+                
+              </mat-expansion-panel>
+        </ng-template>
+    </mat-accordion>
